@@ -44,4 +44,35 @@ class Clock {
     }
 }
 
-const clock = new Clock();
+// const clock = new Clock();
+
+
+
+// --------------------
+// addNumbers
+const readline = require('readline');
+
+const reader = readline.createInterface(process.stdin, process.stdout);
+
+function addNumbers(sum, numsLeft, completionCallback) {
+    if (numsLeft > 0) {
+        reader.question("Please input number:", function (num1) { 
+            let num = parseInt(num1)
+
+            sum += num;
+            console.log("Partial sum = " + sum);
+
+            addNumbers(sum, numsLeft - 1, completionCallback);
+            
+        });
+    } else {
+        completeCallback(sum);
+    }
+};
+
+
+addNumbers(0, 3, function (sum) {
+    console.log("Total Sum: " + sum);
+    reader.close();
+    process.stdin.destroy();
+});
